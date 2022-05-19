@@ -21,7 +21,10 @@ namespace Hotel_management.Commands
 
         public void Execute(object parameter)
         {
-            var foundUser = vm.Users.FirstOrDefault(x => x.name == vm.Username && x.password == vm.Password);
+            var foundUser = vm.Users.FirstOrDefault(x => 
+            x.name == vm.Name && 
+            x.surname==vm.Surname && 
+            x.password == vm.Password);
             if(foundUser != null)
             {
                 MessageBox.Show("Login succesfull");

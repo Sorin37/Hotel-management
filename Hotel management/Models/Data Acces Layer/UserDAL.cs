@@ -26,9 +26,10 @@ namespace Hotel_management.Models.Data_Acces_Layer
                     User p = new User();
                     p.id = (long)reader[0];//reader.GetInt(0);
                     p.name = reader.GetString(1);//reader[1].ToString();
-                    p.password = reader.IsDBNull(2) ? null : reader[2].ToString();
-                    p.type = reader.IsDBNull(3) ? null : reader[3].ToString();
-                    p.deleted = (bool)reader[4];
+                    p.surname = reader.GetString(2);//reader[1].ToString();
+                    p.password = reader.IsDBNull(3) ? null : reader[3].ToString();
+                    p.type = reader.IsDBNull(4) ? null : reader[4].ToString();
+                    p.deleted = (bool)reader[5];
                     result.Add(p);
                 }
                 reader.Close();
@@ -46,8 +47,10 @@ namespace Hotel_management.Models.Data_Acces_Layer
                 SqlCommand cmd = new SqlCommand("AddUser", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 SqlParameter paramName = new SqlParameter("@name", user.name);
+                SqlParameter paramSurname = new SqlParameter("@surname", user.surname);
                 SqlParameter paramPassword = new SqlParameter("@password", user.password);
                 cmd.Parameters.Add(paramName);
+                cmd.Parameters.Add(paramSurname);
                 cmd.Parameters.Add(paramPassword);
                 con.Open();
                 cmd.ExecuteNonQuery();

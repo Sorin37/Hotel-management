@@ -12,13 +12,13 @@ namespace Hotel_management
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class Photo
     {
         public long id { get; set; }
-        public string name { get; set; }
-        public string surname { get; set; }
-        public string password { get; set; }
-        public string type { get; set; }
-        public bool deleted { get; set; }
+        public long room_id { get; set; }
+        public byte[] image { get; set; }
+    
+        public virtual Photo Photo1 { get; set; }
+        public virtual Photo Photo2 { get; set; }
     }
 }

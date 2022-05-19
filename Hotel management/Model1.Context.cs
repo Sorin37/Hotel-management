@@ -27,19 +27,25 @@ namespace Hotel_management
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Photo> Photos { get; set; }
+        public virtual DbSet<Room> Rooms { get; set; }
         public virtual DbSet<User> Users { get; set; }
     
-        public virtual int AddUser(string name, string password)
+        public virtual int AddUser(string name, string surname, string password)
         {
             var nameParameter = name != null ?
                 new ObjectParameter("name", name) :
                 new ObjectParameter("name", typeof(string));
     
+            var surnameParameter = surname != null ?
+                new ObjectParameter("surname", surname) :
+                new ObjectParameter("surname", typeof(string));
+    
             var passwordParameter = password != null ?
                 new ObjectParameter("password", password) :
                 new ObjectParameter("password", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddUser", nameParameter, passwordParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddUser", nameParameter, surnameParameter, passwordParameter);
         }
     
         public virtual ObjectResult<GetAllUsers_Result> GetAllUsers()

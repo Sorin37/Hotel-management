@@ -21,6 +21,19 @@ namespace Hotel_management.Viewmodels
                 NotifyPropertyChanged("Username");
             }
         }
+        private string surname;
+        public string Surname
+        {
+            get
+            {
+                return surname;
+            }
+            set
+            {
+                surname = value;
+                NotifyPropertyChanged("Surname");
+            }
+        }
         private string password;
         public string Password
         {

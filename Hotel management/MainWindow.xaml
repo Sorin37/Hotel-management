@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hotel_management" xmlns:viewmodels="clr-namespace:Hotel_management.Viewmodels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="600" Width="800">
     <Window.DataContext>
         <viewmodels:LoginVM/>
     </Window.DataContext>
@@ -27,17 +27,21 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Label Grid.Column="1" Content="Username:" VerticalAlignment="Bottom"/>
-        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding Username}"/>
-        <Label Grid.Column="1" Grid.Row="2" Content="Password:" VerticalAlignment="Bottom"/>
-        <TextBox Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding Password}"/>
-        <Button Grid.Row="5" Grid.Column="1" Content="Log in" Click="Button_Click"/>
+        <Label Grid.Column="1" Content="Name:" VerticalAlignment="Bottom"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding Name}"/>
+        <Label Grid.Row="2" Grid.Column="1" Content="Surname:" VerticalAlignment="Bottom"/>
+        <TextBox Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding Surname}"/>
+        <Label Grid.Column="1" Grid.Row="4" Content="Password:" VerticalAlignment="Bottom"/>
+        <TextBox Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding Password}"/>
+        <Button Grid.Row="7" Grid.Column="1" Content="Log in" Click="Button_Click"/>
         <!--Command="{Binding Login}"
                 CommandParameter="{Binding RelativeSource={RelativeSource Self}}"/>-->
-        <Button Grid.Row="5" Grid.Column="3" Content="Sign in" Click="Button_Click_1"/>
-        <Button Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="3" 
+        <Button Grid.Row="7" Grid.Column="3" Content="Sign in" Click="Button_Click_1"/>
+        <Button Grid.Row="9" Grid.Column="2" Grid.ColumnSpan="3" 
                 Content="Continue As Guest"
-                Width="150"/>
+                Width="150" Click="Button_Click_2"/>
     </Grid>
 </Window>

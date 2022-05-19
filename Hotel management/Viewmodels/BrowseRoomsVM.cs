@@ -9,7 +9,7 @@ namespace Hotel_management.Viewmodels
     internal class BrowseRoomsVM : BasePropertyChanged
     {
         private User currentUser;
-        public User CurrentUser { 
+        public User CurrentUser {
             get => currentUser;
             set
             {

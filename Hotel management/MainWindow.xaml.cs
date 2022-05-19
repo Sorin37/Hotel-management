@@ -35,9 +35,14 @@ namespace Hotel_management
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            //UserBLL userBLL = new UserBLL();
+            ////login = new LoginCommand(this);
+            //Users = userBLL.GetAllUsers();
             var foundUser = (DataContext as LoginVM).Users.FirstOrDefault(
-                x => x.name == (DataContext as LoginVM).Username &&
-                x.password == (DataContext as LoginVM).Password);
+                x => x.name == (DataContext as LoginVM).Name &&
+                x.surname == (DataContext as LoginVM).Surname &&
+                x.password == (DataContext as LoginVM).Password
+                );
             if (foundUser != null)
             {
                 BrowseRooms br = new BrowseRooms(foundUser);
@@ -54,6 +59,20 @@ namespace Hotel_management
         {
             SignInWindow sw = new SignInWindow();
             sw.Show();
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            BrowseRooms br = new BrowseRooms(new User() { 
+                id = -1,
+                name = "Guest",
+                surname = "",
+                password = "",
+                type = "Guest",
+                deleted = false
+            });
+            br.Show();
+            Close();
         }
     }
 }

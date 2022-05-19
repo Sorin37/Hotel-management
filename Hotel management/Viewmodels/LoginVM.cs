@@ -13,16 +13,29 @@ namespace Hotel_management.Viewmodels
 {
     internal class LoginVM : BasePropertyChanged
     {
-        private string username;
-        public string Username {
+        private string name;
+        public string Name {
             get
             {
-                return username;
+                return name;
             }
             set
             {
-                username = value;
-                NotifyPropertyChanged("Username");
+                name = value;
+                NotifyPropertyChanged("Name");
+            }
+        }
+        private string surname;
+        public string Surname
+        {
+            get
+            {
+                return surname;
+            }
+            set
+            {
+                surname = value;
+                NotifyPropertyChanged("Surname");
             }
         }
         private string password;

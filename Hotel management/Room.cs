@@ -12,13 +12,11 @@ namespace Hotel_management
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class Room
     {
         public long id { get; set; }
-        public string name { get; set; }
-        public string surname { get; set; }
-        public string password { get; set; }
-        public string type { get; set; }
-        public bool deleted { get; set; }
+        public long number { get; set; }
+        public double price { get; set; }
+        public long number_of_rooms { get; set; }
     }
 }

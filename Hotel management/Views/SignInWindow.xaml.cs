@@ -35,6 +35,7 @@ namespace Hotel_management.Views
                 userBLL.AddUser(new User()
                 {
                     name = dc.Username,
+                    surname = dc.Surname,
                     password = dc.Password,
                     type = "Client",
                     deleted = false

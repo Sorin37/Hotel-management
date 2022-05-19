@@ -102,7 +102,14 @@
     </Compile>
     <Compile Include="Models\Business Logic Layer\UserBLL.cs" />
     <Compile Include="Models\Data Acces Layer\DALHelper.cs" />
+    <Compile Include="Models\Data Acces Layer\RoomDAL.cs" />
     <Compile Include="Models\Data Acces Layer\UserDAL.cs" />
+    <Compile Include="Photo.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Room.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="User.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
