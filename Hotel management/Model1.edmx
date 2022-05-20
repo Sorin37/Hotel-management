@@ -50,6 +50,10 @@
           <Parameter Name="surname" Type="nvarchar" Mode="In" />
           <Parameter Name="password" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="GetAllPhotosOfARoom" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="room_id" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="GetAllRooms" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetAllUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="HotelModelStoreContainer">
           <EntitySet Name="Photo" EntityType="Self.Photo" Schema="dbo" store:Type="Tables" />
@@ -120,8 +124,18 @@
             <Parameter Name="surname" Mode="In" Type="String" />
             <Parameter Name="password" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="GetAllPhotosOfARoom" ReturnType="Collection(Binary)">
+            <Parameter Name="room_id" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="GetAllRooms" ReturnType="Collection(HotelModel.GetAllRooms_Result)" />
           <FunctionImport Name="GetAllUsers" ReturnType="Collection(HotelModel.GetAllUsers_Result)" />
         </EntityContainer>
+        <ComplexType Name="GetAllRooms_Result">
+          <Property Type="Int64" Name="id" Nullable="false" />
+          <Property Type="Int64" Name="number" Nullable="false" />
+          <Property Type="Double" Name="price" Nullable="false" />
+          <Property Type="Int64" Name="number_of_rooms" Nullable="false" />
+        </ComplexType>
         <ComplexType Name="GetAllUsers_Result">
           <Property Type="Int64" Name="id" Nullable="false" />
           <Property Type="String" Name="name" Nullable="false" MaxLength="50" />
@@ -168,6 +182,17 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="AddUser" FunctionName="HotelModel.Store.AddUser" />
+          <FunctionImportMapping FunctionImportName="GetAllPhotosOfARoom" FunctionName="HotelModel.Store.GetAllPhotosOfARoom" />
+          <FunctionImportMapping FunctionImportName="GetAllRooms" FunctionName="HotelModel.Store.GetAllRooms">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HotelModel.GetAllRooms_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="number" ColumnName="number" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="number_of_rooms" ColumnName="number_of_rooms" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetAllUsers" FunctionName="HotelModel.Store.GetAllUsers">
             <ResultMapping>
               <ComplexTypeMapping TypeName="HotelModel.GetAllUsers_Result">

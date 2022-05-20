@@ -48,6 +48,20 @@ namespace Hotel_management
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddUser", nameParameter, surnameParameter, passwordParameter);
         }
     
+        public virtual ObjectResult<byte[]> GetAllPhotosOfARoom(Nullable<long> room_id)
+        {
+            var room_idParameter = room_id.HasValue ?
+                new ObjectParameter("room_id", room_id) :
+                new ObjectParameter("room_id", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<byte[]>("GetAllPhotosOfARoom", room_idParameter);
+        }
+    
+        public virtual ObjectResult<GetAllRooms_Result> GetAllRooms()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllRooms_Result>("GetAllRooms");
+        }
+    
         public virtual ObjectResult<GetAllUsers_Result> GetAllUsers()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllUsers_Result>("GetAllUsers");

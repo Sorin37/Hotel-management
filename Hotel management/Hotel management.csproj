@@ -82,6 +82,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\LoginCommand.cs" />
+    <Compile Include="GetAllRooms_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="GetAllUsers_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -100,6 +103,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Business Logic Layer\RoomBLL.cs" />
     <Compile Include="Models\Business Logic Layer\UserBLL.cs" />
     <Compile Include="Models\Data Acces Layer\DALHelper.cs" />
     <Compile Include="Models\Data Acces Layer\RoomDAL.cs" />

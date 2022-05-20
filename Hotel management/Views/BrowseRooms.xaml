@@ -16,9 +16,20 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="150"/>
-            <ColumnDefinition Width="*"/>
-            
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="120"/>
+            <ColumnDefinition Width="100"/>
         </Grid.ColumnDefinitions>
         <TextBlock Text="{Binding CurrentUser.name}" FontSize="30"/>
+        <Label Grid.Column="1" FontSize="30" Content="Room: "/>
+        <Label Grid.Column="2" FontSize="30" Content="{Binding ShownRoom.number}"/>
+        <Label Grid.Column="3" FontSize="30" Content="Price: "/>
+        <Label Grid.Column="4" FontSize="30" Content="{Binding ShownRoom.price}"/>
+        <Label Grid.Column="5" FontSize="30" Content="Persons: "/>
+        <Label Grid.Column="6" FontSize="30" Content="{Binding ShownRoom.number_of_rooms}"/>
+        <Image Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" Source="{Binding ShownImage}"/>
     </Grid>
 </Window>
