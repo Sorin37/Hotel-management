@@ -14,11 +14,20 @@ namespace Hotel_management
     
     public partial class User
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public User()
+        {
+            this.Bookings = new HashSet<Booking>();
+        }
+    
         public long id { get; set; }
         public string name { get; set; }
         public string surname { get; set; }
         public string password { get; set; }
         public string type { get; set; }
         public bool deleted { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Booking> Bookings { get; set; }
     }
 }

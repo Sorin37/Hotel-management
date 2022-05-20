@@ -25,5 +25,14 @@ namespace Hotel_management.Models.Business_Logic_Layer
         {
             return roomDAL.GetAllPhotosOfARoom(id);
         }
+
+        public ObservableCollection<DateTime> GetAllBookingsOfARoom(long id)
+        {
+            return roomDAL.GetAllBookingsOfARoom(id);
+        }
+        public void BookARoom(long room_id, long user_id, DateTime date)
+        {
+            roomDAL.BookARoom(room_id, user_id, date);
+        }
     }
 }

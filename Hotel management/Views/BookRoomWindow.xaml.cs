@@ -1,0 +1,69 @@
+﻿using Hotel_management.Models.Business_Logic_Layer;
+using Hotel_management.Viewmodels;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+
+namespace Hotel_management.Views
+{
+    /// <summary>
+    /// Interaction logic for BookRoomWindow.xaml
+    /// </summary>
+    public partial class BookRoomWindow : Window
+    {   
+
+        public BookRoomWindow(Room room, long user_id)
+        {
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            InitializeComponent();
+            DataContext = new BookRoomVM(room);
+            (DataContext as BookRoomVM).User_id = user_id;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var dc = (DataContext as BookRoomVM);
+            int nr;
+            if (int.TryParse(dc.NumberOfDays, out nr))
+            {
+                bool isVacant = true;
+                for (int i = 0; i < nr; i++)
+                {
+                    var result = dc.Dates.FirstOrDefault(x =>
+                    DateTime.Compare(x, dc.Date.AddDays(i)) == 0
+                    );
+                    if (result.Year != 1)
+                    {
+                        MessageBox.Show(dc.Date.AddDays(i).ToString() + " is already booked");
+                        isVacant = false;
+                        break;
+                    }
+                }
+                if (isVacant)
+                {
+                    RoomBLL roomBLL = new RoomBLL();
+                    for (int i = 0; i < nr; i++)
+                    {
+                        roomBLL.BookARoom(dc.CurrentRoom.id, dc.User_id, dc.Date.AddDays(i));
+                    }
+                    Close();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please enter a number!");
+            }
+        }
+    }
+}

@@ -27,6 +27,7 @@ namespace Hotel_management
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Booking> Bookings { get; set; }
         public virtual DbSet<Photo> Photos { get; set; }
         public virtual DbSet<Room> Rooms { get; set; }
         public virtual DbSet<User> Users { get; set; }
@@ -46,6 +47,15 @@ namespace Hotel_management
                 new ObjectParameter("password", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddUser", nameParameter, surnameParameter, passwordParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<System.DateTime>> GetAllBookingsOfARoom(Nullable<long> room_id)
+        {
+            var room_idParameter = room_id.HasValue ?
+                new ObjectParameter("room_id", room_id) :
+                new ObjectParameter("room_id", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<System.DateTime>>("GetAllBookingsOfARoom", room_idParameter);
         }
     
         public virtual ObjectResult<byte[]> GetAllPhotosOfARoom(Nullable<long> room_id)

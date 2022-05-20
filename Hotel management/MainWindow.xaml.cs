@@ -26,17 +26,17 @@ namespace Hotel_management
         {
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
             InitializeComponent();
-            BrowseRooms br = new BrowseRooms(new User()
-            {
-                id = -1,
-                name = "Guest",
-                surname = "",
-                password = "",
-                type = "Guest",
-                deleted = false
-            });
-            br.Show();
-            Close();
+            //BrowseRooms br = new BrowseRooms(new User()
+            //{
+            //    id = -1,
+            //    name = "Guest",
+            //    surname = "",
+            //    password = "",
+            //    type = "Guest",
+            //    deleted = false
+            //});
+            //br.Show();
+            //Close();
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)

@@ -76,5 +76,48 @@ namespace Hotel_management.Models.Data_Acces_Layer
                 con.Close();
             }
         }
+
+        public ObservableCollection<DateTime> GetAllBookingsOfARoom(long id)
+        {
+            SqlConnection con = DALHelper.Connection;
+            try
+            {
+                SqlCommand cmd = new SqlCommand("GetAllBookingsOfARoom", con);
+                ObservableCollection<DateTime> result = new ObservableCollection<DateTime>();
+                cmd.CommandType = CommandType.StoredProcedure;
+                SqlParameter paramId = new SqlParameter("@room_id", id);
+                cmd.Parameters.Add(paramId);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    DateTime date= (DateTime)reader[0];
+                    result.Add(date);
+                }
+                reader.Close();
+                return result;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public void BookARoom(long room_id, long user_id, DateTime date)
+        {
+            using (SqlConnection con = DALHelper.Connection)
+            {
+                SqlCommand cmd = new SqlCommand("BookARoom", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                SqlParameter paramRoom = new SqlParameter("@room_id", room_id);
+                SqlParameter paramUser = new SqlParameter("@user_id", user_id);
+                SqlParameter paramDate = new SqlParameter("@date", date);
+                cmd.Parameters.Add(paramRoom);
+                cmd.Parameters.Add(paramUser);
+                cmd.Parameters.Add(paramDate);
+                con.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
     }
 }
