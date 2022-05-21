@@ -12,6 +12,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -30,17 +31,25 @@
         <Label Grid.Column="4" FontSize="30" Content="{Binding ShownRoom.price}"/>
         <Label Grid.Column="5" FontSize="30" Content="Persons: "/>
         <Label Grid.Column="6" FontSize="30" Content="{Binding ShownRoom.number_of_rooms}"/>
-        <Image Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" Source="{Binding ShownImage}"/>
-        <Button Grid.Row="1" Grid.Column="2" Height="50" Width="50" Content="&lt;&lt;" Click="Button_Click"/>
-        <Button Grid.Row="1" Grid.Column="5" Height="50" Width="50" Content="&gt;&gt;" Click="Button_Click_1"/>
-        <Button Grid.Row="1" Grid.Column="1" 
+        <Image Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" Source="{Binding ShownImage}"/>
+        <Button Grid.Row="2" Grid.Column="2" Height="50" Width="50" Content="&lt;&lt;" Click="Button_Click"/>
+        <Button Grid.Row="2" Grid.Column="5" Height="50" Width="50" Content="&gt;&gt;" Click="Button_Click_1"/>
+        <Button Grid.Row="2" Grid.Column="1" 
                 Height="50" Content="Previous Room"
                 VerticalAlignment="Bottom" Click="Button_Click_2"/>
-        <Button Grid.Row="1" Grid.Column="6" 
+        <Button Grid.Row="2" Grid.Column="6" 
                 Height="50" Content="Next Room"
                 VerticalAlignment="Bottom" Click="Button_Click_3"/>
-        <Button Grid.Row="1" Grid.Column="3"  Grid.ColumnSpan="2"
+        <Button Grid.Row="2" Grid.Column="3"  Grid.ColumnSpan="2"
                 Height="50"  Width="120" Content="Book this room"
-                VerticalAlignment="Bottom" Click="Button_Click_4"/>
+                VerticalAlignment="Bottom" Click="Button_Click_4"
+                Visibility="Visible" Name="BookButton"/>
+        <Button Grid.Row="2" Height="50" Width="120"
+                Content="Booked rooms"
+                VerticalAlignment="Bottom" Click="Button_Click_5" Name="BookedButton"/>
+        <Label Grid.Row="1" Content="{Binding CurrentUser.type}"/>
+        <Button Grid.Row="2" Height="50" Width="120"
+                Content="Delete users" Visibility="Hidden" Margin="0,0,0,75"
+                VerticalAlignment="Bottom" Click="Button_Click_6" Name="EditButton"/>
     </Grid>
 </Window>

@@ -49,6 +49,32 @@ namespace Hotel_management
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddUser", nameParameter, surnameParameter, passwordParameter);
         }
     
+        public virtual int BookARoom(Nullable<long> room_id, Nullable<long> user_id, Nullable<System.DateTime> date)
+        {
+            var room_idParameter = room_id.HasValue ?
+                new ObjectParameter("room_id", room_id) :
+                new ObjectParameter("room_id", typeof(long));
+    
+            var user_idParameter = user_id.HasValue ?
+                new ObjectParameter("user_id", user_id) :
+                new ObjectParameter("user_id", typeof(long));
+    
+            var dateParameter = date.HasValue ?
+                new ObjectParameter("date", date) :
+                new ObjectParameter("date", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BookARoom", room_idParameter, user_idParameter, dateParameter);
+        }
+    
+        public virtual int DeleteUser(Nullable<long> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteUser", idParameter);
+        }
+    
         public virtual ObjectResult<Nullable<System.DateTime>> GetAllBookingsOfARoom(Nullable<long> room_id)
         {
             var room_idParameter = room_id.HasValue ?
@@ -56,6 +82,15 @@ namespace Hotel_management
                 new ObjectParameter("room_id", typeof(long));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<System.DateTime>>("GetAllBookingsOfARoom", room_idParameter);
+        }
+    
+        public virtual ObjectResult<GetAllBookingsOfAUser_Result> GetAllBookingsOfAUser(Nullable<long> user_id)
+        {
+            var user_idParameter = user_id.HasValue ?
+                new ObjectParameter("user_id", user_id) :
+                new ObjectParameter("user_id", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllBookingsOfAUser_Result>("GetAllBookingsOfAUser", user_idParameter);
         }
     
         public virtual ObjectResult<byte[]> GetAllPhotosOfARoom(Nullable<long> room_id)
@@ -75,6 +110,56 @@ namespace Hotel_management
         public virtual ObjectResult<GetAllUsers_Result> GetAllUsers()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllUsers_Result>("GetAllUsers");
+        }
+    
+        public virtual int ModifyBooking(Nullable<long> user_id, Nullable<long> room_id, Nullable<System.DateTime> date, string state, Nullable<bool> deleted)
+        {
+            var user_idParameter = user_id.HasValue ?
+                new ObjectParameter("user_id", user_id) :
+                new ObjectParameter("user_id", typeof(long));
+    
+            var room_idParameter = room_id.HasValue ?
+                new ObjectParameter("room_id", room_id) :
+                new ObjectParameter("room_id", typeof(long));
+    
+            var dateParameter = date.HasValue ?
+                new ObjectParameter("date", date) :
+                new ObjectParameter("date", typeof(System.DateTime));
+    
+            var stateParameter = state != null ?
+                new ObjectParameter("state", state) :
+                new ObjectParameter("state", typeof(string));
+    
+            var deletedParameter = deleted.HasValue ?
+                new ObjectParameter("deleted", deleted) :
+                new ObjectParameter("deleted", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ModifyBooking", user_idParameter, room_idParameter, dateParameter, stateParameter, deletedParameter);
+        }
+    
+        public virtual int ModifyUser(Nullable<long> id, string name, string surname, string password, string type)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(long));
+    
+            var nameParameter = name != null ?
+                new ObjectParameter("name", name) :
+                new ObjectParameter("name", typeof(string));
+    
+            var surnameParameter = surname != null ?
+                new ObjectParameter("surname", surname) :
+                new ObjectParameter("surname", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(string));
+    
+            var typeParameter = type != null ?
+                new ObjectParameter("type", type) :
+                new ObjectParameter("type", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ModifyUser", idParameter, nameParameter, surnameParameter, passwordParameter, typeParameter);
         }
     }
 }

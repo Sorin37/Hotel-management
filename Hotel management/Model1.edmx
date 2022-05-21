@@ -13,6 +13,8 @@
           <Property Name="room_id" Type="bigint" Nullable="false" />
           <Property Name="user_id" Type="bigint" Nullable="false" />
           <Property Name="date" Type="date" Nullable="false" />
+          <Property Name="state" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="deleted" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Photo">
           <Key>
@@ -83,14 +85,39 @@
           <Parameter Name="surname" Type="nvarchar" Mode="In" />
           <Parameter Name="password" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="BookARoom" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="room_id" Type="bigint" Mode="In" />
+          <Parameter Name="user_id" Type="bigint" Mode="In" />
+          <Parameter Name="date" Type="date" Mode="In" />
+        </Function>
+        <Function Name="DeleteUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="bigint" Mode="In" />
+        </Function>
         <Function Name="GetAllBookingsOfARoom" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="room_id" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="GetAllBookingsOfAUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="user_id" Type="bigint" Mode="In" />
         </Function>
         <Function Name="GetAllPhotosOfARoom" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="room_id" Type="bigint" Mode="In" />
         </Function>
         <Function Name="GetAllRooms" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetAllUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ModifyBooking" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="user_id" Type="bigint" Mode="In" />
+          <Parameter Name="room_id" Type="bigint" Mode="In" />
+          <Parameter Name="date" Type="date" Mode="In" />
+          <Parameter Name="state" Type="nvarchar" Mode="In" />
+          <Parameter Name="deleted" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="ModifyUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="bigint" Mode="In" />
+          <Parameter Name="name" Type="nvarchar" Mode="In" />
+          <Parameter Name="surname" Type="nvarchar" Mode="In" />
+          <Parameter Name="password" Type="nvarchar" Mode="In" />
+          <Parameter Name="type" Type="nvarchar" Mode="In" />
+        </Function>
         <EntityContainer Name="HotelModelStoreContainer">
           <EntitySet Name="Bookings" EntityType="Self.Bookings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Photo" EntityType="Self.Photo" Schema="dbo" store:Type="Tables" />
@@ -122,6 +149,8 @@
           <Property Name="room_id" Type="Int64" Nullable="false" />
           <Property Name="user_id" Type="Int64" Nullable="false" />
           <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="state" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="deleted" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Room" Relationship="Self.FK_Bookings_Room" FromRole="Bookings" ToRole="Room" />
           <NavigationProperty Name="User" Relationship="Self.FK_Bookings_User" FromRole="Bookings" ToRole="User" />
         </EntityType>
@@ -215,15 +244,45 @@
             <Parameter Name="surname" Mode="In" Type="String" />
             <Parameter Name="password" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="BookARoom">
+            <Parameter Name="room_id" Mode="In" Type="Int64" />
+            <Parameter Name="user_id" Mode="In" Type="Int64" />
+            <Parameter Name="date" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteUser">
+            <Parameter Name="id" Mode="In" Type="Int64" />
+          </FunctionImport>
           <FunctionImport Name="GetAllBookingsOfARoom" ReturnType="Collection(DateTime)">
             <Parameter Name="room_id" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="GetAllBookingsOfAUser" ReturnType="Collection(HotelModel.GetAllBookingsOfAUser_Result)">
+            <Parameter Name="user_id" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="GetAllPhotosOfARoom" ReturnType="Collection(Binary)">
             <Parameter Name="room_id" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="GetAllRooms" ReturnType="Collection(HotelModel.GetAllRooms_Result)" />
           <FunctionImport Name="GetAllUsers" ReturnType="Collection(HotelModel.GetAllUsers_Result)" />
+          <FunctionImport Name="ModifyBooking">
+            <Parameter Name="user_id" Mode="In" Type="Int64" />
+            <Parameter Name="room_id" Mode="In" Type="Int64" />
+            <Parameter Name="date" Mode="In" Type="DateTime" />
+            <Parameter Name="state" Mode="In" Type="String" />
+            <Parameter Name="deleted" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="ModifyUser">
+            <Parameter Name="id" Mode="In" Type="Int64" />
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="surname" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+            <Parameter Name="type" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="GetAllBookingsOfAUser_Result">
+          <Property Type="Int64" Name="room_id" Nullable="false" />
+          <Property Type="DateTime" Name="date" Nullable="false" />
+          <Property Type="String" Name="state" Nullable="false" MaxLength="10" />
+        </ComplexType>
         <ComplexType Name="GetAllRooms_Result">
           <Property Type="Int64" Name="id" Nullable="false" />
           <Property Type="Int64" Name="number" Nullable="false" />
@@ -251,6 +310,8 @@
                 <ScalarProperty Name="room_id" ColumnName="room_id" />
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -286,7 +347,18 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="AddUser" FunctionName="HotelModel.Store.AddUser" />
+          <FunctionImportMapping FunctionImportName="BookARoom" FunctionName="HotelModel.Store.BookARoom" />
+          <FunctionImportMapping FunctionImportName="DeleteUser" FunctionName="HotelModel.Store.DeleteUser" />
           <FunctionImportMapping FunctionImportName="GetAllBookingsOfARoom" FunctionName="HotelModel.Store.GetAllBookingsOfARoom" />
+          <FunctionImportMapping FunctionImportName="GetAllBookingsOfAUser" FunctionName="HotelModel.Store.GetAllBookingsOfAUser">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HotelModel.GetAllBookingsOfAUser_Result">
+                <ScalarProperty Name="room_id" ColumnName="room_id" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="state" ColumnName="state" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetAllPhotosOfARoom" FunctionName="HotelModel.Store.GetAllPhotosOfARoom" />
           <FunctionImportMapping FunctionImportName="GetAllRooms" FunctionName="HotelModel.Store.GetAllRooms">
             <ResultMapping>
@@ -310,6 +382,8 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ModifyBooking" FunctionName="HotelModel.Store.ModifyBooking" />
+          <FunctionImportMapping FunctionImportName="ModifyUser" FunctionName="HotelModel.Store.ModifyUser" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

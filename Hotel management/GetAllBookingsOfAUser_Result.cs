@@ -10,18 +10,11 @@
 namespace Hotel_management
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Booking
+    public partial class GetAllBookingsOfAUser_Result
     {
-        public long id { get; set; }
         public long room_id { get; set; }
-        public long user_id { get; set; }
         public System.DateTime date { get; set; }
         public string state { get; set; }
-        public bool deleted { get; set; }
-    
-        public virtual Room Room { get; set; }
-        public virtual User User { get; set; }
     }
 }

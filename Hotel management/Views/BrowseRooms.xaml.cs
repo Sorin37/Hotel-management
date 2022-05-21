@@ -33,6 +33,15 @@ namespace Hotel_management.Views
                 type = currentUser.type,
                 deleted = currentUser.deleted,
             };
+            if (currentUser.type == "Admin")
+            {
+                EditButton.Visibility = Visibility.Visible;
+            }
+            if (currentUser.type == "Guest")
+            {
+                BookButton.Visibility = Visibility.Hidden;
+                BookedButton.Visibility = Visibility.Hidden;
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -96,6 +105,20 @@ namespace Hotel_management.Views
             var currentRoom = (DataContext as BrowseRoomsVM).ShownRoom;
             BookRoomWindow bookRoomWindow = new BookRoomWindow(currentRoom, (DataContext as BrowseRoomsVM).CurrentUser.id);
             bookRoomWindow.Show();
+        }
+
+        private void Button_Click_5(object sender, RoutedEventArgs e)
+        {
+            var dc = DataContext as BrowseRoomsVM;
+            BookedRoomsView bookedRoomsView = new BookedRoomsView(dc.CurrentUser.id);
+            bookedRoomsView.Show();
+        }
+
+        private void Button_Click_6(object sender, RoutedEventArgs e)
+        {
+            AdminView adminView = new AdminView();
+            adminView.Show();
+            Close();
         }
     }
 }
