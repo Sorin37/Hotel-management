@@ -119,5 +119,32 @@ namespace Hotel_management.Models.Data_Acces_Layer
                 cmd.ExecuteNonQuery();
             }
         }
+
+        public ObservableCollection<Tuple<string, double>> GetAllFeaturesOfARoom(long id)
+        {
+            SqlConnection con = DALHelper.Connection;
+            try
+            {
+                SqlCommand cmd = new SqlCommand("GetAllFeaturesOfARoom", con);
+                ObservableCollection<Tuple<string, double>> result = new ObservableCollection<Tuple<string, double>>();
+                cmd.CommandType = CommandType.StoredProcedure;
+                SqlParameter paramId = new SqlParameter("@room_id", id);
+                cmd.Parameters.Add(paramId);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    string name = reader[0].ToString();
+                    double price = (double)reader[1];
+                    result.Add(new Tuple<string, double>(name, price));
+                }
+                reader.Close();
+                return result;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
     }
 }

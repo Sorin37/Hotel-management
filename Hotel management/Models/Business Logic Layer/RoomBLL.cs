@@ -34,5 +34,10 @@ namespace Hotel_management.Models.Business_Logic_Layer
         {
             roomDAL.BookARoom(room_id, user_id, date);
         }
+
+        public ObservableCollection<Tuple<string,double>> GetAllFeaturesOfARoom(long id)
+        {
+            return roomDAL.GetAllFeaturesOfARoom(id);
+        }
     }
 }

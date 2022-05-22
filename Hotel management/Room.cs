@@ -18,6 +18,7 @@ namespace Hotel_management
         public Room()
         {
             this.Bookings = new HashSet<Booking>();
+            this.Features = new HashSet<Feature>();
             this.Photos = new HashSet<Photo>();
         }
     
@@ -28,6 +29,8 @@ namespace Hotel_management
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Booking> Bookings { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Feature> Features { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Photo> Photos { get; set; }
     }

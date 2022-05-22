@@ -85,7 +85,16 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Commands\LoginCommand.cs" />
+    <Compile Include="Feature.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="GetAllBookingsOfAUser_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetAllFeaturesOfARoom_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetAllOffers_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="GetAllRooms_Result.cs">
@@ -110,12 +119,17 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Business Logic Layer\BookingBLL.cs" />
+    <Compile Include="Models\Business Logic Layer\OfferBLL.cs" />
     <Compile Include="Models\Business Logic Layer\RoomBLL.cs" />
     <Compile Include="Models\Business Logic Layer\UserBLL.cs" />
     <Compile Include="Models\Data Acces Layer\BookingDAL.cs" />
     <Compile Include="Models\Data Acces Layer\DALHelper.cs" />
+    <Compile Include="Models\Data Acces Layer\OfferDAL.cs" />
     <Compile Include="Models\Data Acces Layer\RoomDAL.cs" />
     <Compile Include="Models\Data Acces Layer\UserDAL.cs" />
+    <Compile Include="Offer.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Photo.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -131,6 +145,7 @@
     <Compile Include="Viewmodels\BookRoomVM.cs" />
     <Compile Include="Viewmodels\BrowseRoomsVM.cs" />
     <Compile Include="Viewmodels\LoginVM.cs" />
+    <Compile Include="Viewmodels\OffersVM.cs" />
     <Compile Include="Viewmodels\SignInVM.cs" />
     <Compile Include="Views\AdminView.xaml.cs">
       <DependentUpon>AdminView.xaml</DependentUpon>
@@ -143,6 +158,9 @@
     </Compile>
     <Compile Include="Views\BrowseRooms.xaml.cs">
       <DependentUpon>BrowseRooms.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OffersView.xaml.cs">
+      <DependentUpon>OffersView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SignInWindow.xaml.cs">
       <DependentUpon>SignInWindow.xaml</DependentUpon>
@@ -172,6 +190,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\BrowseRooms.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OffersView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

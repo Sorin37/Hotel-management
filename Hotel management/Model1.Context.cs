@@ -28,9 +28,28 @@ namespace Hotel_management
         }
     
         public virtual DbSet<Booking> Bookings { get; set; }
+        public virtual DbSet<Feature> Features { get; set; }
+        public virtual DbSet<Offer> Offers { get; set; }
         public virtual DbSet<Photo> Photos { get; set; }
         public virtual DbSet<Room> Rooms { get; set; }
         public virtual DbSet<User> Users { get; set; }
+    
+        public virtual int AddFeature(Nullable<long> room_id, string name, Nullable<double> price)
+        {
+            var room_idParameter = room_id.HasValue ?
+                new ObjectParameter("room_id", room_id) :
+                new ObjectParameter("room_id", typeof(long));
+    
+            var nameParameter = name != null ?
+                new ObjectParameter("name", name) :
+                new ObjectParameter("name", typeof(string));
+    
+            var priceParameter = price.HasValue ?
+                new ObjectParameter("price", price) :
+                new ObjectParameter("price", typeof(double));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddFeature", room_idParameter, nameParameter, priceParameter);
+        }
     
         public virtual int AddUser(string name, string surname, string password)
         {
@@ -91,6 +110,20 @@ namespace Hotel_management
                 new ObjectParameter("user_id", typeof(long));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllBookingsOfAUser_Result>("GetAllBookingsOfAUser", user_idParameter);
+        }
+    
+        public virtual ObjectResult<GetAllFeaturesOfARoom_Result> GetAllFeaturesOfARoom(Nullable<long> room_id)
+        {
+            var room_idParameter = room_id.HasValue ?
+                new ObjectParameter("room_id", room_id) :
+                new ObjectParameter("room_id", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllFeaturesOfARoom_Result>("GetAllFeaturesOfARoom", room_idParameter);
+        }
+    
+        public virtual ObjectResult<GetAllOffers_Result> GetAllOffers()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllOffers_Result>("GetAllOffers");
         }
     
         public virtual ObjectResult<byte[]> GetAllPhotosOfARoom(Nullable<long> room_id)

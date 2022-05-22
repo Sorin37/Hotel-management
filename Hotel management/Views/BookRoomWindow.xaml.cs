@@ -21,14 +21,31 @@ namespace Hotel_management.Views
     /// Interaction logic for BookRoomWindow.xaml
     /// </summary>
     public partial class BookRoomWindow : Window
-    {   
-
-        public BookRoomWindow(Room room, long user_id)
+    {
+        public BookRoomWindow(Room room, long user_id, Offer offer)
         {
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
             InitializeComponent();
-            DataContext = new BookRoomVM(room);
-            (DataContext as BookRoomVM).User_id = user_id;
+            DataContext = new BookRoomVM(room, offer);
+            var dc = DataContext as BookRoomVM;
+            dc.User_id = user_id;
+            if (offer == null)
+            {
+                dc.Offer = new Offer()
+                {
+                    name = "",
+                    price_reduction = 0
+                };
+            }
+            else
+            {
+                dc.Offer = offer;
+                dc.Date = offer.start_date;
+                Calendar.Visibility = Visibility.Hidden;
+                DaysLabel.Visibility = Visibility.Hidden;
+                DaysTextBox.Visibility = Visibility.Hidden;
+                OfferPanel.Visibility = Visibility.Visible;
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -64,6 +81,22 @@ namespace Hotel_management.Views
             {
                 MessageBox.Show("Please enter a number!");
             }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            var dc = DataContext as BookRoomVM;
+            var feature = dc.Features.First(x => x == dc.SelectedFeature);
+            dc.FinalPrice += feature.Item2;
+            dc.Features.Remove(feature);
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            var dc = DataContext as BookRoomVM;
+            OffersView offersView = new OffersView(dc.CurrentRoom, dc.User_id);
+            offersView.Show();
+            Close();
         }
     }
 }

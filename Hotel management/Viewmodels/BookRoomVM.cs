@@ -25,7 +25,7 @@ namespace Hotel_management.Viewmodels
             }
         }
         public ObservableCollection<DateTime> Dates { get; set; }
-        private string numberOfDays="";
+        private string numberOfDays = "";
         public string NumberOfDays
         {
             get
@@ -43,21 +43,51 @@ namespace Hotel_management.Viewmodels
         public Room CurrentRoom { get; set; }
         public long User_id { get; set; }
 
-        public double Price {
+        private double finalPrice = 0;
+        public double FinalPrice
+        {
+            get
+            {
+                return finalPrice;
+            }
+            set
+            {
+                finalPrice = value;
+                NotifyPropertyChanged("Price");
+            }
+        }
+        public double Price
+        {
             get
             {
                 int days;
-                if(int.TryParse(numberOfDays.ToString(), out days))
+                if (!int.TryParse(numberOfDays.ToString(), out days))
+                    days = 0;
+                if (Offer != null)
                 {
-                    return days * CurrentRoom.price;
+                    return (days * CurrentRoom.price + finalPrice) * (100 - Offer.price_reduction) / 100;
                 }
                 else
                 {
-                    return 0;
+                    return days * CurrentRoom.price + finalPrice;
                 }
             }
         }
-        public BookRoomVM(Room room)
+        public ObservableCollection<Tuple<string, double>> Features { get; set; }
+        public Tuple<string, double> SelectedFeature;
+        private Offer offer = new Offer();
+        public Offer Offer {
+            get
+            {
+                return offer;
+            }
+            set
+            {
+                offer = value;
+                NotifyPropertyChanged("Offer");
+            }
+        }
+        public BookRoomVM(Room room, Offer offer)
         {
             CurrentRoom = new Room();
             CurrentRoom = room;
@@ -65,6 +95,16 @@ namespace Hotel_management.Viewmodels
             Dates = new ObservableCollection<DateTime>();
             RoomBLL roomBLL = new RoomBLL();
             Dates = roomBLL.GetAllBookingsOfARoom(CurrentRoom.id);
+            Features = new ObservableCollection<Tuple<string, double>>();
+            Features = roomBLL.GetAllFeaturesOfARoom(CurrentRoom.id);
+            if (Features.Count > 0)
+            {
+                SelectedFeature = Features[0];
+            }
+            if(offer != null)
+            {
+                NumberOfDays = offer.number_of_days.ToString();
+            }
         }
     }
 }

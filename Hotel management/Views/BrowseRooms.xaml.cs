@@ -103,7 +103,7 @@ namespace Hotel_management.Views
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
             var currentRoom = (DataContext as BrowseRoomsVM).ShownRoom;
-            BookRoomWindow bookRoomWindow = new BookRoomWindow(currentRoom, (DataContext as BrowseRoomsVM).CurrentUser.id);
+            BookRoomWindow bookRoomWindow = new BookRoomWindow(currentRoom, (DataContext as BrowseRoomsVM).CurrentUser.id, null);
             bookRoomWindow.Show();
         }
 
@@ -120,5 +120,6 @@ namespace Hotel_management.Views
             adminView.Show();
             Close();
         }
+
     }
 }
