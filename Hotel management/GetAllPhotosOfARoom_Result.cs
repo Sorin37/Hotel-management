@@ -10,15 +10,10 @@
 namespace Hotel_management
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Photo
+    public partial class GetAllPhotosOfARoom_Result
     {
         public long id { get; set; }
-        public long room_id { get; set; }
         public byte[] image { get; set; }
-        public bool deleted { get; set; }
-    
-        public virtual Room Room { get; set; }
     }
 }

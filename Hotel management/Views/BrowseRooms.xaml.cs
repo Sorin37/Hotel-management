@@ -116,8 +116,8 @@ namespace Hotel_management.Views
 
         private void Button_Click_6(object sender, RoutedEventArgs e)
         {
-            AdminView adminView = new AdminView();
-            adminView.Show();
+            ChooseEditView chooseEditView = new ChooseEditView();
+            chooseEditView.Show();
             Close();
         }
 

@@ -28,8 +28,8 @@
         <TextBlock Grid.Column="4" Text="{Binding Price}"/>
         <ListBox Name="ListBox" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
                  ItemsSource="{Binding Features}"
-                 DisplayMemberPath="Item1"
-                 SelectedItem="{Binding SelectedFeature}"/>
+                 DisplayMemberPath="name"
+                 SelectionChanged="ListBox_SelectionChanged"/>
         <Button Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"
                 Content="Add feature" Width="100" Click="Button_Click_1"/>
         <Button Grid.Row="2" Height="50" Width="120"

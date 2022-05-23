@@ -44,6 +44,7 @@
           <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="room_id" Type="bigint" Nullable="false" />
           <Property Name="image" Type="image" Nullable="false" />
+          <Property Name="deleted" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Room">
           <Key>
@@ -53,6 +54,7 @@
           <Property Name="number" Type="bigint" Nullable="false" />
           <Property Name="price" Type="float" Nullable="false" />
           <Property Name="number_of_rooms" Type="bigint" Nullable="false" />
+          <Property Name="deleted" Type="bit" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -118,6 +120,11 @@
           <Parameter Name="name" Type="nvarchar" Mode="In" />
           <Parameter Name="price" Type="float" Mode="In" />
         </Function>
+        <Function Name="AddRoom" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="number" Type="bigint" Mode="In" />
+          <Parameter Name="price" Type="float" Mode="In" />
+          <Parameter Name="number_of_rooms" Type="bigint" Mode="In" />
+        </Function>
         <Function Name="AddUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="name" Type="nvarchar" Mode="In" />
           <Parameter Name="surname" Type="nvarchar" Mode="In" />
@@ -127,6 +134,9 @@
           <Parameter Name="room_id" Type="bigint" Mode="In" />
           <Parameter Name="user_id" Type="bigint" Mode="In" />
           <Parameter Name="date" Type="date" Mode="In" />
+        </Function>
+        <Function Name="DeleteRoom" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="bigint" Mode="In" />
         </Function>
         <Function Name="DeleteUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="bigint" Mode="In" />
@@ -152,6 +162,12 @@
           <Parameter Name="date" Type="date" Mode="In" />
           <Parameter Name="state" Type="nvarchar" Mode="In" />
           <Parameter Name="deleted" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="ModifyRoom" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="bigint" Mode="In" />
+          <Parameter Name="number" Type="nvarchar" Mode="In" />
+          <Parameter Name="price" Type="float" Mode="In" />
+          <Parameter Name="number_of_rooms" Type="bigint" Mode="In" />
         </Function>
         <Function Name="ModifyUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="bigint" Mode="In" />
@@ -231,6 +247,7 @@
           <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="room_id" Type="Int64" Nullable="false" />
           <Property Name="image" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="deleted" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Room" Relationship="Self.FK_Photo_Room" FromRole="Photo" ToRole="Room" />
         </EntityType>
         <EntityType Name="Room">
@@ -241,6 +258,7 @@
           <Property Name="number" Type="Int64" Nullable="false" />
           <Property Name="price" Type="Double" Nullable="false" />
           <Property Name="number_of_rooms" Type="Int64" Nullable="false" />
+          <Property Name="deleted" Type="Boolean" />
           <NavigationProperty Name="Bookings" Relationship="Self.FK_Bookings_Room" FromRole="Room" ToRole="Bookings" />
           <NavigationProperty Name="Features" Relationship="Self.FK_Feature_Room" FromRole="Room" ToRole="Feature" />
           <NavigationProperty Name="Photos" Relationship="Self.FK_Photo_Room" FromRole="Room" ToRole="Photo" />
@@ -333,6 +351,11 @@
             <Parameter Name="name" Mode="In" Type="String" />
             <Parameter Name="price" Mode="In" Type="Double" />
           </FunctionImport>
+          <FunctionImport Name="AddRoom">
+            <Parameter Name="number" Mode="In" Type="Int64" />
+            <Parameter Name="price" Mode="In" Type="Double" />
+            <Parameter Name="number_of_rooms" Mode="In" Type="Int64" />
+          </FunctionImport>
           <FunctionImport Name="AddUser">
             <Parameter Name="name" Mode="In" Type="String" />
             <Parameter Name="surname" Mode="In" Type="String" />
@@ -342,6 +365,9 @@
             <Parameter Name="room_id" Mode="In" Type="Int64" />
             <Parameter Name="user_id" Mode="In" Type="Int64" />
             <Parameter Name="date" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteRoom">
+            <Parameter Name="id" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="DeleteUser">
             <Parameter Name="id" Mode="In" Type="Int64" />
@@ -356,7 +382,7 @@
             <Parameter Name="room_id" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="GetAllOffers" ReturnType="Collection(HotelModel.GetAllOffers_Result)" />
-          <FunctionImport Name="GetAllPhotosOfARoom" ReturnType="Collection(Binary)">
+          <FunctionImport Name="GetAllPhotosOfARoom" ReturnType="Collection(HotelModel.GetAllPhotosOfARoom_Result)">
             <Parameter Name="room_id" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="GetAllRooms" ReturnType="Collection(HotelModel.GetAllRooms_Result)" />
@@ -367,6 +393,12 @@
             <Parameter Name="date" Mode="In" Type="DateTime" />
             <Parameter Name="state" Mode="In" Type="String" />
             <Parameter Name="deleted" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="ModifyRoom">
+            <Parameter Name="id" Mode="In" Type="Int64" />
+            <Parameter Name="number" Mode="In" Type="String" />
+            <Parameter Name="price" Mode="In" Type="Double" />
+            <Parameter Name="number_of_rooms" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="ModifyUser">
             <Parameter Name="id" Mode="In" Type="Int64" />
@@ -382,6 +414,7 @@
           <Property Type="String" Name="state" Nullable="false" MaxLength="10" />
         </ComplexType>
         <ComplexType Name="GetAllFeaturesOfARoom_Result">
+          <Property Type="Int64" Name="id" Nullable="false" />
           <Property Type="String" Name="name" Nullable="false" MaxLength="50" />
           <Property Type="Double" Name="price" Nullable="false" />
         </ComplexType>
@@ -393,11 +426,16 @@
           <Property Type="Double" Name="price_reduction" Nullable="false" />
           <Property Type="Boolean" Name="deleted" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="GetAllPhotosOfARoom_Result">
+          <Property Type="Int64" Name="id" Nullable="false" />
+          <Property Type="Binary" Name="image" Nullable="false" MaxLength="Max" />
+        </ComplexType>
         <ComplexType Name="GetAllRooms_Result">
           <Property Type="Int64" Name="id" Nullable="false" />
           <Property Type="Int64" Name="number" Nullable="false" />
           <Property Type="Double" Name="price" Nullable="false" />
           <Property Type="Int64" Name="number_of_rooms" Nullable="false" />
+          <Property Type="Boolean" Name="deleted" Nullable="true" />
         </ComplexType>
         <ComplexType Name="GetAllUsers_Result">
           <Property Type="Int64" Name="id" Nullable="false" />
@@ -454,6 +492,7 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="room_id" ColumnName="room_id" />
                 <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -464,6 +503,7 @@
                 <ScalarProperty Name="number" ColumnName="number" />
                 <ScalarProperty Name="price" ColumnName="price" />
                 <ScalarProperty Name="number_of_rooms" ColumnName="number_of_rooms" />
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -480,8 +520,10 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="AddFeature" FunctionName="HotelModel.Store.AddFeature" />
+          <FunctionImportMapping FunctionImportName="AddRoom" FunctionName="HotelModel.Store.AddRoom" />
           <FunctionImportMapping FunctionImportName="AddUser" FunctionName="HotelModel.Store.AddUser" />
           <FunctionImportMapping FunctionImportName="BookARoom" FunctionName="HotelModel.Store.BookARoom" />
+          <FunctionImportMapping FunctionImportName="DeleteRoom" FunctionName="HotelModel.Store.DeleteRoom" />
           <FunctionImportMapping FunctionImportName="DeleteUser" FunctionName="HotelModel.Store.DeleteUser" />
           <FunctionImportMapping FunctionImportName="GetAllBookingsOfARoom" FunctionName="HotelModel.Store.GetAllBookingsOfARoom" />
           <FunctionImportMapping FunctionImportName="GetAllBookingsOfAUser" FunctionName="HotelModel.Store.GetAllBookingsOfAUser">
@@ -496,6 +538,7 @@
           <FunctionImportMapping FunctionImportName="GetAllFeaturesOfARoom" FunctionName="HotelModel.Store.GetAllFeaturesOfARoom">
             <ResultMapping>
               <ComplexTypeMapping TypeName="HotelModel.GetAllFeaturesOfARoom_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="price" ColumnName="price" />
               </ComplexTypeMapping>
@@ -513,7 +556,14 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetAllPhotosOfARoom" FunctionName="HotelModel.Store.GetAllPhotosOfARoom" />
+          <FunctionImportMapping FunctionImportName="GetAllPhotosOfARoom" FunctionName="HotelModel.Store.GetAllPhotosOfARoom">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HotelModel.GetAllPhotosOfARoom_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="image" ColumnName="image" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetAllRooms" FunctionName="HotelModel.Store.GetAllRooms">
             <ResultMapping>
               <ComplexTypeMapping TypeName="HotelModel.GetAllRooms_Result">
@@ -521,6 +571,7 @@
                 <ScalarProperty Name="number" ColumnName="number" />
                 <ScalarProperty Name="price" ColumnName="price" />
                 <ScalarProperty Name="number_of_rooms" ColumnName="number_of_rooms" />
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -537,6 +588,7 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="ModifyBooking" FunctionName="HotelModel.Store.ModifyBooking" />
+          <FunctionImportMapping FunctionImportName="ModifyRoom" FunctionName="HotelModel.Store.ModifyRoom" />
           <FunctionImportMapping FunctionImportName="ModifyUser" FunctionName="HotelModel.Store.ModifyUser" />
         </EntityContainerMapping>
       </Mapping>

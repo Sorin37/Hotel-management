@@ -13,6 +13,7 @@ namespace Hotel_management
     
     public partial class GetAllFeaturesOfARoom_Result
     {
+        public long id { get; set; }
         public string name { get; set; }
         public double price { get; set; }
     }

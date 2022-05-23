@@ -73,8 +73,8 @@ namespace Hotel_management.Viewmodels
                 }
             }
         }
-        public ObservableCollection<Tuple<string, double>> Features { get; set; }
-        public Tuple<string, double> SelectedFeature;
+        public ObservableCollection<Feature> Features { get; set; }
+        public Feature SelectedFeature = new Feature();
         private Offer offer = new Offer();
         public Offer Offer {
             get
@@ -95,7 +95,7 @@ namespace Hotel_management.Viewmodels
             Dates = new ObservableCollection<DateTime>();
             RoomBLL roomBLL = new RoomBLL();
             Dates = roomBLL.GetAllBookingsOfARoom(CurrentRoom.id);
-            Features = new ObservableCollection<Tuple<string, double>>();
+            Features = new ObservableCollection<Feature>();
             Features = roomBLL.GetAllFeaturesOfARoom(CurrentRoom.id);
             if (Features.Count > 0)
             {

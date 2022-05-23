@@ -19,9 +19,9 @@ namespace Hotel_management.Views
     /// <summary>
     /// Interaction logic for AdminView.xaml
     /// </summary>
-    public partial class AdminView : Window
+    public partial class EditUserView : Window
     {
-        public AdminView()
+        public EditUserView()
         {
             InitializeComponent();
         }
@@ -29,7 +29,7 @@ namespace Hotel_management.Views
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             UserBLL userBLL = new UserBLL();
-            var dc = DataContext as AdminVM;
+            var dc = DataContext as EditUserVM;
 
             User user = new User()
             {
@@ -45,7 +45,7 @@ namespace Hotel_management.Views
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             UserBLL userBLL = new UserBLL();
-            var dc = DataContext as AdminVM;
+            var dc = DataContext as EditUserVM;
             var newUser = new User();
             newUser = dc.SelectedUser;
             var user = dc.Users.First(x => x.id == newUser.id);
@@ -56,7 +56,7 @@ namespace Hotel_management.Views
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             UserBLL userBLL = new UserBLL();
-            var dc = DataContext as AdminVM;
+            var dc = DataContext as EditUserVM;
             var newUser = new User();
             newUser = dc.SelectedUser;
             var user = dc.Users.First(x => x.id == newUser.id);

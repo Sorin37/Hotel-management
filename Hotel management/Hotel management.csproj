@@ -49,6 +49,7 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Net" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -97,6 +98,9 @@
     <Compile Include="GetAllOffers_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetAllPhotosOfARoom_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="GetAllRooms_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -139,7 +143,8 @@
     <Compile Include="User.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Viewmodels\AdminVM.cs" />
+    <Compile Include="Viewmodels\EditRoomVM.cs" />
+    <Compile Include="Viewmodels\EditUserVM.cs" />
     <Compile Include="Viewmodels\BasePropertyChanged.cs" />
     <Compile Include="Viewmodels\BookedRoomsVM.cs" />
     <Compile Include="Viewmodels\BookRoomVM.cs" />
@@ -147,8 +152,14 @@
     <Compile Include="Viewmodels\LoginVM.cs" />
     <Compile Include="Viewmodels\OffersVM.cs" />
     <Compile Include="Viewmodels\SignInVM.cs" />
-    <Compile Include="Views\AdminView.xaml.cs">
-      <DependentUpon>AdminView.xaml</DependentUpon>
+    <Compile Include="Views\ChooseEditView.xaml.cs">
+      <DependentUpon>ChooseEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditRoomView.xaml.cs">
+      <DependentUpon>EditRoomView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditUserView.xaml.cs">
+      <DependentUpon>EditUserView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\BookedRoomsView.xaml.cs">
       <DependentUpon>BookedRoomsView.xaml</DependentUpon>
@@ -177,7 +188,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\AdminView.xaml">
+    <Page Include="Views\ChooseEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditRoomView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditUserView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -238,6 +257,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\no_photo.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Model1.Context.tt">

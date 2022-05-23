@@ -51,6 +51,23 @@ namespace Hotel_management
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddFeature", room_idParameter, nameParameter, priceParameter);
         }
     
+        public virtual int AddRoom(Nullable<long> number, Nullable<double> price, Nullable<long> number_of_rooms)
+        {
+            var numberParameter = number.HasValue ?
+                new ObjectParameter("number", number) :
+                new ObjectParameter("number", typeof(long));
+    
+            var priceParameter = price.HasValue ?
+                new ObjectParameter("price", price) :
+                new ObjectParameter("price", typeof(double));
+    
+            var number_of_roomsParameter = number_of_rooms.HasValue ?
+                new ObjectParameter("number_of_rooms", number_of_rooms) :
+                new ObjectParameter("number_of_rooms", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddRoom", numberParameter, priceParameter, number_of_roomsParameter);
+        }
+    
         public virtual int AddUser(string name, string surname, string password)
         {
             var nameParameter = name != null ?
@@ -83,6 +100,15 @@ namespace Hotel_management
                 new ObjectParameter("date", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BookARoom", room_idParameter, user_idParameter, dateParameter);
+        }
+    
+        public virtual int DeleteRoom(Nullable<long> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteRoom", idParameter);
         }
     
         public virtual int DeleteUser(Nullable<long> id)
@@ -126,13 +152,13 @@ namespace Hotel_management
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllOffers_Result>("GetAllOffers");
         }
     
-        public virtual ObjectResult<byte[]> GetAllPhotosOfARoom(Nullable<long> room_id)
+        public virtual ObjectResult<GetAllPhotosOfARoom_Result> GetAllPhotosOfARoom(Nullable<long> room_id)
         {
             var room_idParameter = room_id.HasValue ?
                 new ObjectParameter("room_id", room_id) :
                 new ObjectParameter("room_id", typeof(long));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<byte[]>("GetAllPhotosOfARoom", room_idParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllPhotosOfARoom_Result>("GetAllPhotosOfARoom", room_idParameter);
         }
     
         public virtual ObjectResult<GetAllRooms_Result> GetAllRooms()
@@ -168,6 +194,27 @@ namespace Hotel_management
                 new ObjectParameter("deleted", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ModifyBooking", user_idParameter, room_idParameter, dateParameter, stateParameter, deletedParameter);
+        }
+    
+        public virtual int ModifyRoom(Nullable<long> id, string number, Nullable<double> price, Nullable<long> number_of_rooms)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(long));
+    
+            var numberParameter = number != null ?
+                new ObjectParameter("number", number) :
+                new ObjectParameter("number", typeof(string));
+    
+            var priceParameter = price.HasValue ?
+                new ObjectParameter("price", price) :
+                new ObjectParameter("price", typeof(double));
+    
+            var number_of_roomsParameter = number_of_rooms.HasValue ?
+                new ObjectParameter("number_of_rooms", number_of_rooms) :
+                new ObjectParameter("number_of_rooms", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ModifyRoom", idParameter, numberParameter, priceParameter, number_of_roomsParameter);
         }
     
         public virtual int ModifyUser(Nullable<long> id, string name, string surname, string password, string type)

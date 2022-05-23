@@ -86,9 +86,12 @@ namespace Hotel_management.Views
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             var dc = DataContext as BookRoomVM;
-            var feature = dc.Features.First(x => x == dc.SelectedFeature);
-            dc.FinalPrice += feature.Item2;
-            dc.Features.Remove(feature);
+            if (dc.Features.Count > 0)
+            {
+                var feature = dc.Features.First(x => x == dc.SelectedFeature);
+                dc.FinalPrice += feature.price;
+                dc.Features.Remove(feature);
+            }
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
@@ -97,6 +100,16 @@ namespace Hotel_management.Views
             OffersView offersView = new OffersView(dc.CurrentRoom, dc.User_id);
             offersView.Show();
             Close();
+        }
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var dc = DataContext as BookRoomVM;
+            dc.SelectedFeature = (sender as ListBox).SelectedItem as Feature;
+        }
+
+        private void ListBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

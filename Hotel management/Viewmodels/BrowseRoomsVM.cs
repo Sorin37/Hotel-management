@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -53,8 +55,11 @@ namespace Hotel_management.Viewmodels
             ShownRoom = new Room();
             ShownRoom = Rooms[0];
             Images = new ObservableCollection<BitmapFrame>();
-            Images = roomBLL.GetAllPhotosOfARoom(6);
-            ShownImage = Images[0];
+            Images = roomBLL.GetAllPhotosOfARoom(ShownRoom.id);
+            if (Images.Count > 0)
+            {
+                ShownImage = Images[0];
+            }
         }
     }
 }

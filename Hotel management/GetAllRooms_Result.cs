@@ -17,5 +17,6 @@ namespace Hotel_management
         public long number { get; set; }
         public double price { get; set; }
         public long number_of_rooms { get; set; }
+        public Nullable<bool> deleted { get; set; }
     }
 }

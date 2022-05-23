@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Hotel_management.Viewmodels
 {
-    internal class AdminVM : BasePropertyChanged
+    internal class EditUserVM : BasePropertyChanged
     {
         public ObservableCollection<User> Users { get; set; }
 
@@ -24,7 +24,7 @@ namespace Hotel_management.Viewmodels
                 NotifyPropertyChanged("SelectedUser");
             }
         }
-        public AdminVM()
+        public EditUserVM()
         {
             UserBLL userBLL = new UserBLL();
             Users = new ObservableCollection<User>();

@@ -49,7 +49,7 @@
                 VerticalAlignment="Bottom" Click="Button_Click_5" Name="BookedButton"/>
         <Label Grid.Row="1" Content="{Binding CurrentUser.type}"/>
         <Button Grid.Row="2" Height="50" Width="120"
-                Content="Delete users" Visibility="Hidden" Margin="0,0,0,75"
+                Content="Edit" Visibility="Hidden" Margin="0,0,0,75"
                 VerticalAlignment="Bottom" Click="Button_Click_6" Name="EditButton"/>
         
     </Grid>
