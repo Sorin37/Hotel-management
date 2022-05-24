@@ -51,6 +51,19 @@ namespace Hotel_management
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddFeature", room_idParameter, nameParameter, priceParameter);
         }
     
+        public virtual int AddPhoto(Nullable<long> room_id, byte[] image)
+        {
+            var room_idParameter = room_id.HasValue ?
+                new ObjectParameter("room_id", room_id) :
+                new ObjectParameter("room_id", typeof(long));
+    
+            var imageParameter = image != null ?
+                new ObjectParameter("image", image) :
+                new ObjectParameter("image", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddPhoto", room_idParameter, imageParameter);
+        }
+    
         public virtual int AddRoom(Nullable<long> number, Nullable<double> price, Nullable<long> number_of_rooms)
         {
             var numberParameter = number.HasValue ?
@@ -100,6 +113,24 @@ namespace Hotel_management
                 new ObjectParameter("date", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BookARoom", room_idParameter, user_idParameter, dateParameter);
+        }
+    
+        public virtual int DeleteFeature(Nullable<long> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteFeature", idParameter);
+        }
+    
+        public virtual int DeletePhoto(Nullable<long> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeletePhoto", idParameter);
         }
     
         public virtual int DeleteRoom(Nullable<long> id)
@@ -194,6 +225,27 @@ namespace Hotel_management
                 new ObjectParameter("deleted", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ModifyBooking", user_idParameter, room_idParameter, dateParameter, stateParameter, deletedParameter);
+        }
+    
+        public virtual int ModifyFeature(Nullable<long> id, Nullable<long> room_id, string name, Nullable<double> price)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(long));
+    
+            var room_idParameter = room_id.HasValue ?
+                new ObjectParameter("room_id", room_id) :
+                new ObjectParameter("room_id", typeof(long));
+    
+            var nameParameter = name != null ?
+                new ObjectParameter("name", name) :
+                new ObjectParameter("name", typeof(string));
+    
+            var priceParameter = price.HasValue ?
+                new ObjectParameter("price", price) :
+                new ObjectParameter("price", typeof(double));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ModifyFeature", idParameter, room_idParameter, nameParameter, priceParameter);
         }
     
         public virtual int ModifyRoom(Nullable<long> id, string number, Nullable<double> price, Nullable<long> number_of_rooms)

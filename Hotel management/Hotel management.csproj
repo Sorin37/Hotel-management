@@ -123,12 +123,16 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Business Logic Layer\BookingBLL.cs" />
+    <Compile Include="Models\Business Logic Layer\FeatureBLL.cs" />
     <Compile Include="Models\Business Logic Layer\OfferBLL.cs" />
+    <Compile Include="Models\Business Logic Layer\PhotoBLL.cs" />
     <Compile Include="Models\Business Logic Layer\RoomBLL.cs" />
     <Compile Include="Models\Business Logic Layer\UserBLL.cs" />
     <Compile Include="Models\Data Acces Layer\BookingDAL.cs" />
     <Compile Include="Models\Data Acces Layer\DALHelper.cs" />
+    <Compile Include="Models\Data Acces Layer\FeatureDAL.cs" />
     <Compile Include="Models\Data Acces Layer\OfferDAL.cs" />
+    <Compile Include="Models\Data Acces Layer\PhotoDAL.cs" />
     <Compile Include="Models\Data Acces Layer\RoomDAL.cs" />
     <Compile Include="Models\Data Acces Layer\UserDAL.cs" />
     <Compile Include="Offer.cs">
@@ -143,6 +147,8 @@
     <Compile Include="User.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Viewmodels\EditFeaturesVM.cs" />
+    <Compile Include="Viewmodels\EditPhotoVM.cs" />
     <Compile Include="Viewmodels\EditRoomVM.cs" />
     <Compile Include="Viewmodels\EditUserVM.cs" />
     <Compile Include="Viewmodels\BasePropertyChanged.cs" />
@@ -154,6 +160,12 @@
     <Compile Include="Viewmodels\SignInVM.cs" />
     <Compile Include="Views\ChooseEditView.xaml.cs">
       <DependentUpon>ChooseEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditFeaturesView.xaml.cs">
+      <DependentUpon>EditFeaturesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditPhotoView.xaml.cs">
+      <DependentUpon>EditPhotoView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\EditRoomView.xaml.cs">
       <DependentUpon>EditRoomView.xaml</DependentUpon>
@@ -189,6 +201,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\ChooseEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditFeaturesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditPhotoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -260,6 +280,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\no_photo.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\trashbin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\addphoto.png" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Model1.Context.tt">

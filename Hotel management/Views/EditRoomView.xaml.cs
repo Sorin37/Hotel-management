@@ -65,5 +65,21 @@ namespace Hotel_management.Views
             dc.Rooms.Remove(room);
             roomBLL.DeleteRoom(newRoom.id);
         }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            var dc = DataContext as EditRoomVM;
+            EditPhotoView editPhotoView = new EditPhotoView(dc.SelectedRoom.id);
+            editPhotoView.Show();
+            Close();
+        }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            var dc = DataContext as EditRoomVM;
+            EditFeaturesView editPhotoView = new EditFeaturesView(dc.SelectedRoom.id);
+            editPhotoView.Show();
+            Close();
+        }
     }
 }

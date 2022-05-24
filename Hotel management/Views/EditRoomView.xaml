@@ -30,8 +30,8 @@
             <Button  Content="Add" Width="100" Margin="50, 0, 0, 0" Click="Button_Click"/>
             <Button  Content="Modify" Width="100" Margin="50, 0, 0, 0" Click="Button_Click_1"/>
             <Button  Content="Delete" Width="100" Margin="50, 0, 0, 0" Click="Button_Click_2"/>
-            <Button  Content="Edit photos" Width="100" Margin="50, 0, 0, 0"/>
-            <Button  Content="Edit features" Width="100" Margin="50, 0, 0, 0"/>
+            <Button  Content="Edit photos" Width="100" Margin="50, 0, 0, 0" Click="Button_Click_3"/>
+            <Button  Content="Edit features" Width="100" Margin="50, 0, 0, 0" Click="Button_Click_4"/>
         </StackPanel>
         <DataGrid Grid.Row="7" Name="personsGrid" Margin="0,15,0,0" Height="250"
                   AutoGenerateColumns="False" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Visible"

@@ -120,6 +120,10 @@
           <Parameter Name="name" Type="nvarchar" Mode="In" />
           <Parameter Name="price" Type="float" Mode="In" />
         </Function>
+        <Function Name="AddPhoto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="room_id" Type="bigint" Mode="In" />
+          <Parameter Name="image" Type="image" Mode="In" />
+        </Function>
         <Function Name="AddRoom" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="number" Type="bigint" Mode="In" />
           <Parameter Name="price" Type="float" Mode="In" />
@@ -134,6 +138,12 @@
           <Parameter Name="room_id" Type="bigint" Mode="In" />
           <Parameter Name="user_id" Type="bigint" Mode="In" />
           <Parameter Name="date" Type="date" Mode="In" />
+        </Function>
+        <Function Name="DeleteFeature" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="DeletePhoto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="bigint" Mode="In" />
         </Function>
         <Function Name="DeleteRoom" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="bigint" Mode="In" />
@@ -162,6 +172,12 @@
           <Parameter Name="date" Type="date" Mode="In" />
           <Parameter Name="state" Type="nvarchar" Mode="In" />
           <Parameter Name="deleted" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="ModifyFeature" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="bigint" Mode="In" />
+          <Parameter Name="room_id" Type="bigint" Mode="In" />
+          <Parameter Name="name" Type="nvarchar" Mode="In" />
+          <Parameter Name="price" Type="float" Mode="In" />
         </Function>
         <Function Name="ModifyRoom" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="bigint" Mode="In" />
@@ -351,6 +367,10 @@
             <Parameter Name="name" Mode="In" Type="String" />
             <Parameter Name="price" Mode="In" Type="Double" />
           </FunctionImport>
+          <FunctionImport Name="AddPhoto">
+            <Parameter Name="room_id" Mode="In" Type="Int64" />
+            <Parameter Name="image" Mode="In" Type="Binary" />
+          </FunctionImport>
           <FunctionImport Name="AddRoom">
             <Parameter Name="number" Mode="In" Type="Int64" />
             <Parameter Name="price" Mode="In" Type="Double" />
@@ -365,6 +385,12 @@
             <Parameter Name="room_id" Mode="In" Type="Int64" />
             <Parameter Name="user_id" Mode="In" Type="Int64" />
             <Parameter Name="date" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteFeature">
+            <Parameter Name="id" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="DeletePhoto">
+            <Parameter Name="id" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="DeleteRoom">
             <Parameter Name="id" Mode="In" Type="Int64" />
@@ -393,6 +419,12 @@
             <Parameter Name="date" Mode="In" Type="DateTime" />
             <Parameter Name="state" Mode="In" Type="String" />
             <Parameter Name="deleted" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="ModifyFeature">
+            <Parameter Name="id" Mode="In" Type="Int64" />
+            <Parameter Name="room_id" Mode="In" Type="Int64" />
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="price" Mode="In" Type="Double" />
           </FunctionImport>
           <FunctionImport Name="ModifyRoom">
             <Parameter Name="id" Mode="In" Type="Int64" />
@@ -520,9 +552,12 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="AddFeature" FunctionName="HotelModel.Store.AddFeature" />
+          <FunctionImportMapping FunctionImportName="AddPhoto" FunctionName="HotelModel.Store.AddPhoto" />
           <FunctionImportMapping FunctionImportName="AddRoom" FunctionName="HotelModel.Store.AddRoom" />
           <FunctionImportMapping FunctionImportName="AddUser" FunctionName="HotelModel.Store.AddUser" />
           <FunctionImportMapping FunctionImportName="BookARoom" FunctionName="HotelModel.Store.BookARoom" />
+          <FunctionImportMapping FunctionImportName="DeleteFeature" FunctionName="HotelModel.Store.DeleteFeature" />
+          <FunctionImportMapping FunctionImportName="DeletePhoto" FunctionName="HotelModel.Store.DeletePhoto" />
           <FunctionImportMapping FunctionImportName="DeleteRoom" FunctionName="HotelModel.Store.DeleteRoom" />
           <FunctionImportMapping FunctionImportName="DeleteUser" FunctionName="HotelModel.Store.DeleteUser" />
           <FunctionImportMapping FunctionImportName="GetAllBookingsOfARoom" FunctionName="HotelModel.Store.GetAllBookingsOfARoom" />
@@ -588,6 +623,7 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="ModifyBooking" FunctionName="HotelModel.Store.ModifyBooking" />
+          <FunctionImportMapping FunctionImportName="ModifyFeature" FunctionName="HotelModel.Store.ModifyFeature" />
           <FunctionImportMapping FunctionImportName="ModifyRoom" FunctionName="HotelModel.Store.ModifyRoom" />
           <FunctionImportMapping FunctionImportName="ModifyUser" FunctionName="HotelModel.Store.ModifyUser" />
         </EntityContainerMapping>

@@ -23,15 +23,15 @@ namespace Hotel_management.Models.Business_Logic_Layer
             return userDAL.GetAllUsers();
         }
 
-        public void AddUser(User user)
-        {
-            userDAL.AddUser(user);
-            UserList.Add(user);
-        }
 
         public ObservableCollection<Tuple<long, DateTime, string>> GetAllBookingsOfAUser(long id)
         {
             return userDAL.GetAllBookingsOfAUser(id);
+        }
+        public void AddUser(User user)
+        {
+            userDAL.AddUser(user);
+            UserList.Add(user);
         }
 
 

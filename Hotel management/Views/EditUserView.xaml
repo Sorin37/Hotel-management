@@ -7,9 +7,6 @@
         xmlns:viewmodels="clr-namespace:Hotel_management.Viewmodels"
         mc:Ignorable="d"
         Title="AdminView" Height="800" Width="800">
-    <Window.DataContext>
-        <viewmodels:EditUserVM/>
-    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
