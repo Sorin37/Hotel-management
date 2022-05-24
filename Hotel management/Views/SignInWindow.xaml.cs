@@ -43,6 +43,7 @@ namespace Hotel_management.Views
             } else {
                 MessageBox.Show("The passwords don't match!");
             }
+            Close();
         }
     }
 }

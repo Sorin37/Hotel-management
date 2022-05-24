@@ -52,12 +52,22 @@ namespace Hotel_management.Viewmodels
         }
         //private LoginCommand login;
         //public ICommand Login { get => login; }
-        public ObservableCollection<User> Users {get;set;}
+        private ObservableCollection<User> users = new ObservableCollection<User>();
+        public ObservableCollection<User> Users {
+            get
+            {
+                return users;
+            }
+            set
+            {
+                users = value;
+                NotifyPropertyChanged("Users");
+            }
+        }
 
         public LoginVM()
         {
             UserBLL userBLL = new UserBLL();
-            //login = new LoginCommand(this);
             Users = userBLL.GetAllUsers();
         }
     }

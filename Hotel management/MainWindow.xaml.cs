@@ -1,4 +1,5 @@
-﻿using Hotel_management.Viewmodels;
+﻿using Hotel_management.Models.Business_Logic_Layer;
+using Hotel_management.Viewmodels;
 using Hotel_management.Views;
 using System;
 using System.Collections.Generic;
@@ -46,13 +47,13 @@ namespace Hotel_management
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //UserBLL userBLL = new UserBLL();
-            ////login = new LoginCommand(this);
-            //Users = userBLL.GetAllUsers();
-            var foundUser = (DataContext as LoginVM).Users.FirstOrDefault(
-                x => x.name == (DataContext as LoginVM).Name &&
-                x.surname == (DataContext as LoginVM).Surname &&
-                x.password == (DataContext as LoginVM).Password
+            var dc = DataContext as LoginVM;
+            UserBLL userBLL = new UserBLL();
+            dc.Users = userBLL.GetAllUsers();
+            var foundUser = dc.Users.FirstOrDefault(
+                x => x.name == dc.Name &&
+                x.surname == dc.Surname &&
+                x.password == dc.Password
                 );
             if (foundUser != null)
             {
@@ -62,7 +63,7 @@ namespace Hotel_management
             }
             else
             {
-                MessageBox.Show("Incorrect authentification credentials!");
+                MessageBox.Show("Wrong name and password combination!");
             }
         }
 

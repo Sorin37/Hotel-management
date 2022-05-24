@@ -5,43 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hotel_management" xmlns:viewmodels="clr-namespace:Hotel_management.Viewmodels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="800">
+        Title="MainWindow" Height="500" Width="400" FontSize="20" Background="#3D3B8E">
     <Window.DataContext>
         <viewmodels:LoginVM/>
     </Window.DataContext>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Label Grid.Column="1" Content="Name:" VerticalAlignment="Bottom"/>
-        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding Name}"/>
-        <Label Grid.Row="2" Grid.Column="1" Content="Surname:" VerticalAlignment="Bottom"/>
-        <TextBox Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding Surname}"/>
-        <Label Grid.Column="1" Grid.Row="4" Content="Password:" VerticalAlignment="Bottom"/>
-        <TextBox Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding Password}"/>
-        <Button Grid.Row="7" Grid.Column="1" Content="Log in" Click="Button_Click"/>
-        <!--Command="{Binding Login}"
-                CommandParameter="{Binding RelativeSource={RelativeSource Self}}"/>-->
-        <Button Grid.Row="7" Grid.Column="3" Content="Sign in" Click="Button_Click_1"/>
-        <Button Grid.Row="9" Grid.Column="2" Grid.ColumnSpan="3" 
-                Content="Continue As Guest"
-                Width="150" Click="Button_Click_2"/>
-    </Grid>
+    <Border Background="#2e3137" CornerRadius="20" Margin="20">
+        <StackPanel Margin="20">
+            <Label Content="Name:" Foreground="White"/>
+            <TextBox Text="{Binding Name}" Background="#B0E298" Foreground="#2e3137"/>
+            <Label  Content="Surname:" VerticalAlignment="Bottom" Foreground="#F9F9F9"/>
+            <TextBox Text="{Binding Surname}" Background="#B0E298" Foreground="#2e3137"/>
+            <Label Content="Password:" VerticalAlignment="Bottom" Foreground="#F9F9F9"/>
+            <TextBox Text="{Binding Password}" Background="#B0E298" Foreground="#2e3137"/>
+            <Button Content="Log in" Click="Button_Click"
+                    Margin="60 10" Background="#E072A4" Foreground="#F9F9F9"/>
+            <Button Margin="60 10" Background="#E072A4" Foreground="#F9F9F9"
+                    Content="Sign in" Click="Button_Click_1"/>
+            <Button Margin="60 10" Background="#E072A4" Foreground="#F9F9F9" 
+                Content="Continue As Guest" Click="Button_Click_2"/>
+        </StackPanel>
+    </Border>
 </Window>
