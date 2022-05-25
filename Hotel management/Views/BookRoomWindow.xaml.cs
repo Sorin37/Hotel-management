@@ -74,6 +74,7 @@ namespace Hotel_management.Views
                     {
                         roomBLL.BookARoom(dc.CurrentRoom.id, dc.User_id, dc.Date.AddDays(i));
                     }
+                    MessageBox.Show($"Booked succesfully! Your price is: {dc.FinalPrice}");
                     Close();
                 }
             }

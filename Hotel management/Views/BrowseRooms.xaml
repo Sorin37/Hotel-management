@@ -5,52 +5,74 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hotel_management.Views" xmlns:viewmodels="clr-namespace:Hotel_management.Viewmodels"
         mc:Ignorable="d"
-        Title="BrowseRooms" Height="450" Width="800">
+        Title="BrowseRooms" Height="490" Width="840" Background="#3D3B8E">
     <Window.DataContext>
         <viewmodels:BrowseRoomsVM/>
     </Window.DataContext>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="150"/>
-            <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="120"/>
-            <ColumnDefinition Width="100"/>
-        </Grid.ColumnDefinitions>
-        <TextBlock Text="{Binding CurrentUser.name}" FontSize="30"/>
-        <Label Grid.Column="1" FontSize="30" Content="Room: "/>
-        <Label Grid.Column="2" FontSize="30" Content="{Binding ShownRoom.number}"/>
-        <Label Grid.Column="3" FontSize="30" Content="Price: "/>
-        <Label Grid.Column="4" FontSize="30" Content="{Binding ShownRoom.price}"/>
-        <Label Grid.Column="5" FontSize="30" Content="Persons: "/>
-        <Label Grid.Column="6" FontSize="30" Content="{Binding ShownRoom.number_of_rooms}"/>
-        <Image Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" Source="{Binding ShownImage}"/>
-        <Button Grid.Row="2" Grid.Column="2" Height="50" Width="50" Content="&lt;&lt;" Click="Button_Click"/>
-        <Button Grid.Row="2" Grid.Column="5" Height="50" Width="50" Content="&gt;&gt;" Click="Button_Click_1"/>
-        <Button Grid.Row="2" Grid.Column="1" 
-                Height="50" Content="Previous Room"
-                VerticalAlignment="Bottom" Click="Button_Click_2"/>
-        <Button Grid.Row="2" Grid.Column="6" 
-                Height="50" Content="Next Room"
-                VerticalAlignment="Bottom" Click="Button_Click_3"/>
-        <Button Grid.Row="2" Grid.Column="3"  Grid.ColumnSpan="2"
-                Height="50"  Width="120" Content="Book this room"
-                VerticalAlignment="Bottom" Click="Button_Click_4"
-                Visibility="Visible" Name="BookButton"/>
-        <Button Grid.Row="2" Height="50" Width="120"
-                Content="Booked rooms"
-                VerticalAlignment="Bottom" Click="Button_Click_5" Name="BookedButton"/>
-        <Label Grid.Row="1" Content="{Binding CurrentUser.type}"/>
-        <Button Grid.Row="2" Height="50" Width="120"
-                Content="Edit" Visibility="Hidden" Margin="0,0,0,75"
-                VerticalAlignment="Bottom" Click="Button_Click_6" Name="EditButton"/>
-        
-    </Grid>
+    <Border Background="#2e3137" CornerRadius="20" Margin="20">
+        <DockPanel Margin="20">
+            <Grid DockPanel.Dock="Left">
+                <StackPanel VerticalAlignment="Top">
+                    <TextBlock Text="{Binding CurrentUser.name}" FontSize="30" Foreground="#F9F9F9"/>
+                    <Label Content="{Binding CurrentUser.type}" Foreground="#F9F9F9"/>
+                </StackPanel>
+                <StackPanel VerticalAlignment="Bottom">
+                    <Button Height="50" Width="120"
+                            Content="Edit" Visibility="Hidden" Margin="0, 0, 0, 50"
+                            Click="Button_Click_6" Name="EditButton"
+                            Background="#E072A4" Foreground="#F9F9F9"/>
+                    <Button Height="50" Width="120" Content="Booked rooms"
+                            Background="#E072A4" Foreground="#F9F9F9"
+                            Click="Button_Click_5" Name="BookedButton"/>
+                </StackPanel>
+            </Grid>
+            <Grid Width="500">
+                <StackPanel VerticalAlignment="Center" Orientation="Horizontal" Margin="0,0,0,50">
+                    <Button HorizontalAlignment="Left" Background="#2e3137"
+                    Height="50" Width="50" Click="Button_Click">
+                        <Image Source="../Assets/Arrowleftbg.png" Height="50" Width="50"/>
+                    </Button>
+                    <Image HorizontalAlignment="Center" Source="{Binding ShownImage}" 
+                       Width="395" Height="300"/>
+                    <Button HorizontalAlignment="Right" Height="55" Width="55"
+                            Click="Button_Click_1" Background="#2e3137">
+                        <Image Source="../Assets/Arrowrightbg.png" Height="50" Width="50"/>
+                    </Button>
+                </StackPanel>
+                <Grid Height="50" VerticalAlignment="Bottom">
+                    <Button HorizontalAlignment="Left" Height="50" Width="120"
+                            Click="Button_Click_2" Background="#2e3137">
+                        <Image Source="../Assets/Arrowleftroom.png" Height="50" Width="120"/>
+                    </Button>
+                    <Button HorizontalAlignment="Center" Height="50" Width="120" Content="Book"
+                            Click="Button_Click_4" Visibility="Visible" Name="BookButton"
+                            Background="#E072A4" Foreground="#F9F9F9"/>
+                    <Button HorizontalAlignment="Right" Height="50" Width="120" 
+                            Click="Button_Click_3" Background="#2e3137">
+                        <Image Source="../Assets/Arrowrightroom.png" Height="50" Width="120"/>
+                    </Button>
+                </Grid>
+            </Grid>
+            <StackPanel DockPanel.Dock="Right">
+                <StackPanel Orientation="Horizontal">
+                    <Label FontSize="30" Content="Room: " 
+                           Foreground="#F9F9F9"/>
+                    <Label FontSize="30" Content="{Binding ShownRoom.number}" 
+                           Foreground="#F9F9F9"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label  FontSize="30" Content="Price: " 
+                            Foreground="#F9F9F9"/>
+                    <Label  FontSize="30" Content="{Binding ShownRoom.price}"
+                            Foreground="#F9F9F9"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label  FontSize="30" Content="Persons: "
+                            Foreground="#F9F9F9"/>
+                    <Label  FontSize="30" Content="{Binding ShownRoom.number_of_rooms}"
+                            Foreground="#F9F9F9"/>
+                </StackPanel>
+            </StackPanel>
+        </DockPanel>
+    </Border>
 </Window>

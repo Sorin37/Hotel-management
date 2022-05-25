@@ -288,6 +288,10 @@
     <Resource Include="Assets\addphoto.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Assets\Arrowleftbg.png" />
+    <Resource Include="Assets\Arrowrightbg.png" />
+    <Resource Include="Assets\Arrowleftroom.png" />
+    <Resource Include="Assets\Arrowrightroom.png" />
     <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
