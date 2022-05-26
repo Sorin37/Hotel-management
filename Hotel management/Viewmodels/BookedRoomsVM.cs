@@ -9,9 +9,20 @@ using System.Windows;
 
 namespace Hotel_management.Viewmodels
 {
-    internal class BookedRoomsVM
+    internal class BookedRoomsVM : BasePropertyChanged
     {
-        public ObservableCollection<Tuple<long, DateTime, string>> RoomTime { get; set; }
+        public ObservableCollection<Tuple<long, DateTime, string>> roomTime { get; set; }
+        public ObservableCollection<Tuple<long, DateTime, string>> RoomTime {
+            get
+            {
+                return roomTime;
+            }
+            set
+            {
+                roomTime = value;
+                NotifyPropertyChanged("RoomTime");
+            }
+        }
         public Tuple<long, DateTime, string> HighlightedBooking { get; set; }
         public long CurrentUserId;
         public BookedRoomsVM(long user_id)
@@ -24,8 +35,6 @@ namespace Hotel_management.Viewmodels
             {
                 HighlightedBooking = RoomTime[0];
             }
-
-            //MessageBox.Show(RoomTime[0].Item1.ToString() + RoomTime[0].Item2.ToString());
         }
     }
 }

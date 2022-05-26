@@ -5,38 +5,36 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hotel_management.Views" xmlns:viewmodels="clr-namespace:Hotel_management.Viewmodels"
         mc:Ignorable="d"
-        Title="BookRoomWindow" Height="450" Width="800">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="150"/>
-            <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="50"/>
-            <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="50"/>
-        </Grid.RowDefinitions>
-        <DatePicker Name="Calendar" SelectedDate="{Binding Date}" Visibility="Visible"/>
-        <Label Name="DaysLabel" Grid.Column="1" Content="How many days?" Visibility="Visible"/>
-        <TextBox Name="DaysTextBox" Grid.Column="2" Text="{Binding NumberOfDays}" Visibility="Visible"/>
-        <Button Grid.Column="4" Grid.Row="2" Height="50" Content="Book" Click="Button_Click"/>
-        <Label Grid.Column="3" Content="Price:"/>
-        <TextBlock Grid.Column="4" Text="{Binding Price}"/>
-        <ListBox Name="ListBox" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
-                 ItemsSource="{Binding Features}"
-                 DisplayMemberPath="name"
-                 SelectionChanged="ListBox_SelectionChanged"/>
-        <Button Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"
-                Content="Add feature" Width="100" Click="Button_Click_1"/>
-        <Button Grid.Row="2" Height="50" Width="120"
-                Content="Deals" Click="Button_Click_2"/>
-        <StackPanel Grid.Row="1" Visibility="Hidden" Name="OfferPanel">
-            <Label Content="Offer name:"/>
-            <Label Content="{Binding Offer.name}"/>
-        </StackPanel>
-    </Grid>
+        Title="BookRoomWindow" Height="450" Width="800" Background="#3D3B8E">
+    <Border Background="#2e3137" CornerRadius="20" Margin="20">
+        <Grid Margin="20">
+            <StackPanel HorizontalAlignment="Left" Width="150" Grid.RowSpan="2">
+                <DatePicker Name="Calendar" SelectedDate="{Binding Date}"
+                            Visibility="Visible" Width="105"/>
+                <Label Name="DaysLabel" Content="How many days?" Visibility="Visible" 
+                       HorizontalAlignment="Left" Foreground="#F9F9F9"/>
+                <TextBox Name="DaysTextBox" Text="{Binding NumberOfDays}" Visibility="Visible" 
+                         Width="50" HorizontalAlignment="Left"
+                         Background="#B0E298" Foreground="#2e3137"
+                         Margin="5,0,0,0"/>
+                <ListBox Name="ListBox" ItemsSource="{Binding Features}"
+                         DisplayMemberPath="name" SelectionChanged="ListBox_SelectionChanged"
+                         Margin="5"/>
+                <Button Content="Add feature" Width="100" Height="40" Click="Button_Click_1"
+                         Background="#E072A4" Foreground="#F9F9F9" VerticalAlignment="Center"/>
+            </StackPanel>
+            <Grid Width="500" Margin="110,0,110,0" Grid.RowSpan="2">
+                <Label Content="{Binding Offer.name}" Visibility="Hidden" Name="OfferPanel"
+                   VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="50" Foreground="#B0E298"/>
+                <TextBlock Text="{Binding Price}" FontSize="50" Foreground="Yellow" 
+                       VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <Button Height="40" Width="120" VerticalAlignment="Bottom"
+                        Content="Deals" Click="Button_Click_2"
+                        Background="#E072A4" Foreground="#F9F9F9" Margin="15"/>
+                <Button Height="40" Width="100" Content="Book" Click="Button_Click"
+                        HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                        Background="#E072A4" Foreground="#F9F9F9" Margin="15"/>
+            </Grid>
+        </Grid>
+    </Border>
 </Window>

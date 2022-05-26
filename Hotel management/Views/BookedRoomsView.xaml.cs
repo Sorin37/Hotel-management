@@ -44,7 +44,9 @@ namespace Hotel_management.Views
                 user_id = dc.CurrentUserId,
                 state = "canceled",
                 deleted = false
-            }); 
+            });
+            UserBLL userBLL = new UserBLL();
+            dc.RoomTime = userBLL.GetAllBookingsOfAUser(dc.CurrentUserId);
         }
     }
 }

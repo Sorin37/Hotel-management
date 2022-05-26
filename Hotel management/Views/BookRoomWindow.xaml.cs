@@ -87,11 +87,12 @@ namespace Hotel_management.Views
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             var dc = DataContext as BookRoomVM;
-            if (dc.Features.Count > 0)
+            if (dc.Features.Count > 0 && dc.SelectedFeature != null)
             {
                 var feature = dc.Features.First(x => x == dc.SelectedFeature);
                 dc.FinalPrice += feature.price;
                 dc.Features.Remove(feature);
+                dc.SelectedFeature = null;
             }
         }
 

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hotel_management.Views" xmlns:viewmodels="clr-namespace:Hotel_management.Viewmodels"
         mc:Ignorable="d"
-        Title="BrowseRooms" Height="490" Width="840" Background="#3D3B8E">
+        Title="BrowseRooms" Height="490" Width="900" Background="#3D3B8E">
     <Window.DataContext>
         <viewmodels:BrowseRoomsVM/>
     </Window.DataContext>
@@ -53,7 +53,7 @@
                     </Button>
                 </Grid>
             </Grid>
-            <StackPanel DockPanel.Dock="Right">
+            <StackPanel DockPanel.Dock="Right" Width="200">
                 <StackPanel Orientation="Horizontal">
                     <Label FontSize="30" Content="Room: " 
                            Foreground="#F9F9F9"/>
